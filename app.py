@@ -28,7 +28,7 @@ def listar_filmes():
         return
     
     for filme in filmes:
-        preco = f"R$ {filme['preco_promocional']:.2f} (PROMOÇÃO)" if filme['preco_promocional'] else f"R$ {filme['preco']:.2f}"
+        preco = f"R$ {filme['preco_promocional']:.2f} (PROMOÇÃO)" if filme['preco_promocional'] is not None else f"R$ {filme['preco']:.2f}"
         print(f"ID: {filme['id']} | {filme['titulo']} | {filme['diretor']} | {filme['ano']} | {filme['genero']} | {preco} | Estoque: {filme['estoque']}")
         
 def cadastrar_filme(titulo, diretor, ano, genero, preco, estoque):
@@ -118,7 +118,7 @@ def adicionar_estoque(id, quantidade):
     with open("filmes.json", "w", encoding='utf-8') as arquivo:
         json.dump(filmes, arquivo, indent=2)
         
-    print(f"Estoque atualizado com sucesso.")
+    print(f"Estoque do filme {filme['titulo']} atualizado com sucesso.")
     
 def promocao_filme(id, desconto):
     with open("filmes.json", "r", encoding='utf-8') as arquivo:
@@ -177,7 +177,7 @@ def registrar_venda(filme_id, quantidade):
     with open("filmes.json", "w", encoding='utf-8') as arquivo:
         json.dump(filmes, arquivo, indent=2)
     
-    preco = filme_encontrado['preco_promocional'] if filme_encontrado["preco_promocional"] else filme_encontrado["preco"]
+    preco = filme_encontrado['preco_promocional'] if filme_encontrado["preco_promocional"] is not None else filme_encontrado["preco"]
     
     with open("vendas.json", "r", encoding='utf-8') as arquivo:
         vendas = json.load(arquivo)
@@ -260,30 +260,38 @@ def deletar_filme(id):
         
     print(f"Filme '{titulo_deletado}' deletado com sucesso!")
 
+def buscar_filme_por_id(id):
+    with open("filmes.json", 'r', encoding='utf-8') as arquivo:
+        filmes = json.load(arquivo)
+
+    for filme in filmes:
+        if filme['id'] == id:
+            return filme
+    
+    return None
+
 def menu():
     while True:
         print("\n=== LOCADORA DE FILMES ===")
-        print("1 - Listar filmes")
-        print("2 - Cadastrar filmes")
-        print("3 - Pesquisar filme")
-        print("4 - Alterar preço")
-        print("5 - Adicionar estoque")
-        print("6 - Registrar venda")
-        print("7 - Promoção de um filme")
-        print("8 - Promoção em todos os filme")
-        print("9  - Cancelar promoção de um filme")
-        print("10 - Cancelar promoção em todos os filme")
-        print("11 - Deletar de um filme")
-        print("12 - Iniciar os arquivos")
+        print("01 - Listar filmes")
+        print("02 - Cadastrar filmes")
+        print("03 - Pesquisar filme")
+        print("04 - Alterar preço")
+        print("05 - Adicionar estoque")
+        print("06 - Registrar venda")
+        print("07 - Aplicar promoção")
+        print("08 - Cancelar promoção")
+        print("09 - Deletar de um filme")
+        print("10 - Iniciar os arquivos")
         print("0 - Sair")
     
         opcao = int(input("\nEscolha uma opção: "))
     
 
-        # listar_filmes()
+        # 01 - Listar filmes
         if opcao == 1:
             listar_filmes()
-        # cadastrar_filme()
+        # 02 - Cadastrar filmes
         elif opcao == 2:
             titulo = input("Titulo: ")
             diretor = input("Diretor: ")
@@ -292,7 +300,7 @@ def menu():
             preco = float(input("Preço: "))
             estoque = int(input("Estoque: "))
             cadastrar_filme(titulo, diretor, ano, genero, preco, estoque)
-        # pesquisar_filme()
+        # 03 - Pesquisar filme
         elif opcao == 3:
             print("Pesquisar categoria por: 1 - Titulo | 2 - Diretor | 3 - Ano")
             sub = int(input("Escolha a categoria: "))
@@ -302,39 +310,61 @@ def menu():
                 pesquisar_filme("diretor", input("Diretor: "))
             elif sub == 3:
                 pesquisar_filme("ano", input("Ano: "))
-        # alterar_preco()        
+        # 04 - Alterar preço        
         elif opcao == 4:
             id = int(input("ID do filme: "))
-            preco = float(input("Novo preço: R$ "))
-            alterar_preco(id, preco)
-        # adicionar estoque
+            filme = buscar_filme_por_id(id)
+
+            if not filme:
+                print('Filme não encontrado')
+            else:
+                print(f"Preço atual do filme '{filme['titulo']}' é de R$ {filme['preco']:.2f}")
+                preco = float(input("Novo preço: R$ "))
+                alterar_preco(id, preco)
+        # 05 - Adicionar estoque
         elif opcao == 5:
             id = int(input("ID do filme: "))
-            quantidade = int(input("Quantidade: "))
-            adicionar_estoque(id, quantidade)
-        # registrar_venda
+            filme = buscar_filme_por_id(id)
+            
+            if not filme:
+                print(f"ID {id} não encontrado")
+            else:
+                print(f"O estoque atual do filme '{filme['titulo']}' é {filme['estoque']}.")
+                quantidade = int(input("Quantos devo adicionar: "))
+                adicionar_estoque(id, quantidade)
+        # 06 - Registrar venda
         elif opcao == 6:
             id = int(input("ID do filme: "))
             quantidade = int(input("Quantidade: "))
             registrar_venda(id, quantidade)
-        # promocao_filme
+        # 07 - Aplicar promoção
         elif opcao == 7:
-            id = int(input("ID do filme: "))
-            desconto = float(input("Desconto (%): "))
-            promocao_filme(id, desconto)
-        # promocao_todos
+            tipo_promo = int(input("Qual tipo de promo? 1 - Um filme | 2 - Todos os filmes: "))
+            if tipo_promo == 1:
+                id = int(input("ID do filme: "))
+                desconto = float(input("Desconto (%): "))
+                promocao_filme(id, desconto)
+            elif tipo_promo == 2:
+                desconto = float(input("Desconto (%): "))
+                promocao_todos(desconto)
+            else:
+                print(f"{id} inválido!")
+        # 08 - Cancelar promoção
         elif opcao == 8:
-            desconto = float(input("Desconto (%): "))
-            promocao_todos(desconto)
+            tipo_cancelamento = int(input("Qual forma de cancelamento? 1 - Um filme | 2 - Todos os filmes: "))
+            if tipo_cancelamento == 1:
+                id = int(input("ID do filme: "))
+                cancelar_promo_filme(id)
+            elif tipo_cancelamento == 2:
+                cancelar_promo_todos()
+            else:
+                print(f"{tipo_cancelamento} é inválido!")
+        # 09 - Deletar de um filme
         elif opcao == 9:
             id = int(input("ID do filme: "))
-            cancelar_promo_filme(id)
-        elif opcao == 10:
-            cancelar_promo_todos()
-        elif opcao == 11:
-            id = int(input("ID do filme: "))
             deletar_filme(id)
-        elif opcao == 12:
+        # 10 - Iniciar os arquivos
+        elif opcao == 10:
             iniciar_arquivos()
         #sair
         elif opcao == 0:

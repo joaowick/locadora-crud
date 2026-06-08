@@ -7,5 +7,14 @@
     "preco_unitario": 44.9,
     "total": 449.0,
     "data_hora": "07/06/2026 22:39:59"
+  },
+  {
+    "id": 2,
+    "filme_id": 7,
+    "titulo": "Blade Runner 2049",
+    "quantidade": 10,
+    "preco_unitario": 15.0,
+    "total": 150.0,
+    "data_hora": "08/06/2026 16:47:35"
   }
 ]

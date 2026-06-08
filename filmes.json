@@ -5,7 +5,7 @@
     "diretor": "Christopher Nolan",
     "ano": 2023,
     "genero": "Drama",
-    "preco": 34.9,
+    "preco": 35.9,
     "estoque": 8,
     "preco_promocional": null
   },
@@ -37,6 +37,26 @@
     "genero": "Fic\u00e7\u00e3o Cient\u00edfica",
     "preco": 70.0,
     "estoque": "5",
+    "preco_promocional": null
+  },
+  {
+    "id": 7,
+    "titulo": "Blade Runner 2049",
+    "diretor": "Denis Villeneuve",
+    "ano": 2017,
+    "genero": "Fic\u00e7\u00e3o cient\u00edfica",
+    "preco": 15.0,
+    "estoque": 10,
+    "preco_promocional": null
+  },
+  {
+    "id": 8,
+    "titulo": "A Espada Era a Lei",
+    "diretor": "Wolfgang Reitherman",
+    "ano": 1964,
+    "genero": "Infantil",
+    "preco": 40.0,
+    "estoque": 40,
     "preco_promocional": null
   }
 ]
