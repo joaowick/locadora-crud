@@ -1,0 +1,42 @@
+[
+  {
+    "id": 3,
+    "titulo": "Oppenheimer",
+    "diretor": "Christopher Nolan",
+    "ano": 2023,
+    "genero": "Drama",
+    "preco": 34.9,
+    "estoque": 8,
+    "preco_promocional": null
+  },
+  {
+    "id": 4,
+    "titulo": "A Odisseia",
+    "diretor": "Christopher Nolan",
+    "ano": 2026,
+    "genero": "Drama",
+    "preco": 44.9,
+    "estoque": 90,
+    "preco_promocional": null
+  },
+  {
+    "id": 5,
+    "titulo": "The Batman",
+    "diretor": "Matt Reeves",
+    "ano": "2022",
+    "genero": "A\u00e7\u00e3o",
+    "preco": 90.0,
+    "estoque": "10",
+    "preco_promocional": null
+  },
+  {
+    "id": 6,
+    "titulo": "Duna - Parte 1",
+    "diretor": "Denis Villeneuve",
+    "ano": "2021",
+    "genero": "Fic\u00e7\u00e3o Cient\u00edfica",
+    "preco": 70.0,
+    "estoque": "5",
+    "preco_promocional": null
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "filme_id": 4,
+    "titulo": "A Odisseia",
+    "quantidade": 10,
+    "preco_unitario": 44.9,
+    "total": 449.0,
+    "data_hora": "07/06/2026 22:39:59"
+  }
+]
