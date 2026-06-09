@@ -16,5 +16,23 @@
     "preco_unitario": 15.0,
     "total": 150.0,
     "data_hora": "08/06/2026 16:47:35"
+  },
+  {
+    "id": 3,
+    "filme_id": 3,
+    "titulo": "Oppenheimer",
+    "quantidade": 3,
+    "preco_unitario": 35.9,
+    "total": 107.7,
+    "data_hora": "09/06/2026 09:16:26"
+  },
+  {
+    "id": 4,
+    "filme_id": 4,
+    "titulo": "A Odisseia",
+    "quantidade": 10,
+    "preco_unitario": 44.9,
+    "total": 449.0,
+    "data_hora": "09/06/2026 09:16:38"
   }
 ]
