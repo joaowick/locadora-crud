@@ -1,3 +1,5 @@
+#filmes.py
+
 import os
 import json
 
@@ -15,6 +17,13 @@ def iniciar_arquivos():
         print("Arquivo vendas.json criado automaticamente.")
     else:
         print("Arquivo vendas.json já existente.")
+
+    if not os.path.exists("historico.json"):
+        with open("historico.json", "w", encoding='utf-8') as arquivo:
+            json.dump([], arquivo)
+        print("Arquivo historico.json criado automaticamente.")
+    else:
+        print("Arquivo historico.json já existente.")
         
 def listar_filmes():
     with open("filmes.json", "r", encoding='utf-8') as arquivo:

@@ -1,3 +1,5 @@
+# relatorios.py
+
 import json
 
 def painel_bi():

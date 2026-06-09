@@ -1,3 +1,5 @@
+# vendas.py
+
 import json
 from datetime import datetime
 from relatorios import atualizar_historico

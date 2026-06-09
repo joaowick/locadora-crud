@@ -1,10 +1,6 @@
 [
   {
-    "titulo": "A Odisseia",
-    "total_vendido": 10
-  },
-  {
     "titulo": "Oppenheimer",
-    "total_vendido": 3
+    "total_vendido": 10
   }
 ]
